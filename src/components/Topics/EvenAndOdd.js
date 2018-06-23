@@ -9,28 +9,41 @@ export default class EvenAndOdd extends Component {
       userInput: ""
     };
   }
-
-  evens(nums) {
-    var arr = userInput.split(",");
+  handleChange(val) {
+    this.setState({ userInput: val });
+  }
+  evensAndOdds(userInput) {
+    var arr = userInput.split(" ");
     var evens = [];
     var odds = [];
-    for (x in nums) {
-      if (nums[x] % 2 === 0) {
-        evens.push(nums[x]);
-      } else if (!nums[x] % 2 === 0) {
-        odds.push(nums[x]);
-      }
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] % 2 === 0
+        ? evens.push(parseInt(arr[i]))
+        : odds.push(parseInt(arr[i]));
     }
+    this.setState({ evenArray: evens, oddArray: odds });
   }
 
   render() {
     return (
       <div className="puzzleBox evenAndOddPB">
         <h4>Evens and Odds</h4>
-        <input onChange={e => this.userInput(e)} className="inputLine" />
-        <button className="confirmationButton" />
-        <span className="resultsBox" />
-        <span className="resultsBox" />
+        <input
+          className="inputLine"
+          onChange={thiss => this.handleChange(thiss.target.value)}
+        />
+        <button
+          className="confirmationButton"
+          onClick={() => this.evensAndOdds(this.state.userInput)}
+        >
+          Split
+        </button>
+        <span className="resultsBox">
+          Evens: {JSON.stringify(this.state.evenArray)}
+        </span>
+        <span className="resultsBox">
+          Odds: {JSON.stringify(this.state.oddArray)}
+        </span>
       </div>
     );
   }
