@@ -13,7 +13,7 @@ export default class EvenAndOdd extends Component {
     this.setState({ userInput: val });
   }
   evensAndOdds(userInput) {
-    var arr = userInput.split(" ");
+    var arr = userInput.split(",");
     var evens = [];
     var odds = [];
     for (var i = 0; i < arr.length; i++) {
